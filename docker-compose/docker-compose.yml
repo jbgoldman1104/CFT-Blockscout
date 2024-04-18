@@ -42,6 +42,8 @@ services:
         ETHEREUM_JSONRPC_TRACE_URL: http://65.109.108.59:8545/
         ETHEREUM_JSONRPC_WS_URL: ws://65.109.108.59:8546/
         CHAIN_ID: '3450'
+    ports:
+      - 4000:4000
 
   visualizer:
     extends:
@@ -52,6 +54,13 @@ services:
     extends:
       file: ./services/sig-provider.yml
       service: sig-provider
+  
+  sc-verifier:
+    extends:
+      file: ./services/smart-contract-verifier.yml
+      service: smart-contract-verifier
+    ports:
+      - 8050:8050
 
   frontend:
     depends_on:
